@@ -14,27 +14,26 @@ turtle = Player()
 car_manager = CarManager()
 scoreboard = Scoreboard()
 
-screen.onkey(turtle.move_up, "Up")
+screen.onkey(turtle.go_up, "Up")
 
 game_is_on = True
-iterations = 0
 while game_is_on:
     time.sleep(0.1)
     screen.update()
-    if iterations % 6 == 0:
-        car_manager.add_car()
+
+    car_manager.create_car()
     car_manager.move_cars()
 
     for car in car_manager.cars:
-        if turtle.distance(car) < 20:
+        if car.distance(turtle) < 20:
             game_is_on = False
             scoreboard.game_over()
 
-    if turtle.ycor() > 300:
+    if turtle.is_at_finish_line():
         scoreboard.next_level()
-        scoreboard.create_scoreboard()
-        turtle.start()
+        scoreboard.update_scoreboard()
+        turtle.go_to_start()
+        car_manager.increase_car_speed()
 
-    iterations += 1
 
 screen.exitonclick()

@@ -9,9 +9,9 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.penup()
         self.goto(-220, 250)
-        self.create_scoreboard()
+        self.update_scoreboard()
 
-    def create_scoreboard(self):
+    def update_scoreboard(self):
         self.clear()
         self.write(f"Level {self.level}", align="center", font=FONT)
 
